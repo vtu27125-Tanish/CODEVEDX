@@ -1,12 +1,29 @@
+package com.codevedx.library.model;
+
+import jakarta.persistence.*;
+
+@Entity
+@Table(name = "students")
 public class Student {
 
-    private int id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @Column(nullable = false)
     private String name;
+
+    @Column(nullable = false)
     private int age;
+
+    @Column(nullable = false)
     private String department;
+
     private String email;
 
-    // Constructor used when creating a NEW student (no id yet - DB auto-generates it)
+    public Student() {
+    }
+
     public Student(String name, int age, String department, String email) {
         this.name = name;
         this.age = age;
@@ -14,21 +31,11 @@ public class Student {
         this.email = email;
     }
 
-    // Constructor used when reading a student BACK from the database (id is known)
-    public Student(int id, String name, int age, String department, String email) {
-        this.id = id;
-        this.name = name;
-        this.age = age;
-        this.department = department;
-        this.email = email;
-    }
-
-    // Getters and setters (encapsulation)
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -62,14 +69,5 @@ public class Student {
 
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    @Override
-    public String toString() {
-        return "ID: " + id +
-               " | Name: " + name +
-               " | Age: " + age +
-               " | Department: " + department +
-               " | Email: " + email;
     }
 }
